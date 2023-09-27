@@ -1,0 +1,158 @@
+/* Reset de margens e preenchimentos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #7fdbff;
+    transition: background-color 0.5s;
+}
+
+.container_pai {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* max-width: 50%; */
+    /* margin: 0; */
+}
+
+.container {
+    background-color: #FFFFFF;
+    padding: 20px;
+    padding-left: 70px;
+    padding-right: 70px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    overflow: hidden;
+    width: 300px ; 
+    transition: box-shadow 0.3s;
+}
+
+h2 {
+    color: #7fdbff;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+button {
+    background-color: #7fdbff;
+    color: #FFFFFF;
+    border: none;
+    margin-top: 30px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #66b3cc;
+}
+
+/*meu acordeon*/
+.accordion-button {
+    background-color: #7fdbff;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.accordion-button:hover {
+    background-color: #66b3cc;
+}
+
+.accordion-content {
+    display: none;
+    padding: 10px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para o campo de upload de arquivo */
+.label-file-upload {
+    display: block;
+    background-color: #7fdbff;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.label-file-upload:hover {
+    background-color: #66b3cc;
+}
+
+/* Efeito hover para labels e botões */
+.form-group:hover label,
+.button-container button:hover {
+    color: #7fdbff;
+}
+
+/* Animação Foda */
+.container:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Efeito Foda */
+body:hover {
+    background-color: #66b3cc;
+}
