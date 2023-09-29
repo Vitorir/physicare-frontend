@@ -1,19 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/imagens/logo.jpeg"
+import logo from "../../assets/imagens/logo.jpeg";
 
-function Navbar() {
+function Navbar({ isLoggedIn, handleLogout }) {
   return (
     <>
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <Link to={"/"} class="navbar-item" >
-            <img 
-              className="logo"
-              src={logo}
-              width="75"
-              height="150"
-            />
+          <Link to={"/"} class="navbar-item">
+            <img className="logo" src={logo} width="75" height="150" />
           </Link>
 
           <a
@@ -36,11 +31,11 @@ function Navbar() {
             </Link>
 
             <Link to={"/contato"} class="navbar-item">
-            Sobre
+              Sobre
             </Link>
 
             <Link to={"/contato"} class="navbar-item">
-            Contato
+              Contato
             </Link>
 
             {/* <div class="navbar-item has-dropdown is-hoverable">
@@ -58,12 +53,25 @@ function Navbar() {
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <Link to={"/cadastro"} class="button is-info is-light">
-                  <strong>Cadastrar</strong>
-                </Link>
-                <Link to={"/login"} class="button is-light">
-                  Entrar
-                </Link>
+                {isLoggedIn ? (
+                  <>
+                    <li>
+                      <Link to="/minha-conta">Minha Conta</Link>
+                    </li>
+                    <li>
+                      <button onClick={handleLogout}>Sair</button>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/cadastro">Cadastrar</Link>
+                    </li>
+                    <li>
+                      <Link to="/login">Entrar</Link>
+                    </li>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -7,6 +7,8 @@ import Home2 from "./Pages/Home/Home2";
 import Footer from "./Components/Footer/Footer";
 
 function App() {
+
+  
   return (
     <>
       <BrowserRouter>
