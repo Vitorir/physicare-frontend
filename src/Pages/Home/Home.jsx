@@ -3,6 +3,7 @@ import gif from "../../assets/imagens/beam-online-medical-consultation.gif"; // 
 import qualificados from "../../assets/imagens/bloom-doctors-appointment.png"; // Substitua 'qualificados.png' pelo caminho correto da imagem
 import objetivos from "../../assets/imagens/sammy-line-man-with-a-smartwatch-is-running.png"; // Substitua 'objetivos.png' pelo caminho correto da imagem
 import flexibilidade from "../../assets/imagens/outline-health-app.png"; // Substitua 'flexibilidade.png' pelo caminho correto da imagem
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -18,9 +19,9 @@ function Home() {
                 tornando o seu bem-estar uma prioridade. Comece hoje a sua
                 jornada para uma vida mais saudável e ativa.
               </p>
-              <a href="acessar_minha_conta.html" className="button is-primary">
+              <Link to={"/login"} className="button is-primary">
                 Acessar Minha Conta
-              </a>
+              </Link>
             </div>
           </div>
         </aside>

@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Page404 from "./Pages/Page404/Page404";
 import Home2 from "./Pages/Home/Home2";
 import Footer from "./Components/Footer/Footer";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home2 />}></Route>
           <Route path="/cadastro" element={<Cadastro />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
         <Footer />

@@ -5,9 +5,10 @@ import axios from "axios";
 
 function CadastroForm() {
   const navigate = useNavigate();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [mensagem, setMensagem] = useState(""); // Para exibir mensagens de erro ou sucesso
+  const [mensagem, setMensagem] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -18,10 +19,15 @@ function CadastroForm() {
 
       if (response.status === 200) {
         setMensagem("Login bem-sucedido!");
-        // Você pode redirecionar o usuário para a página principal ou fazer outra ação aqui
+        
+        sessionStorage.setItem("accessToken", JSON.stringify(response.data.accessToken))
+
+        setTimeout(() => {
+          navigate('/dashboard')
+        }, [2000])
+        
       } else {
-        // Se o servidor retornar um erro, capture a mensagem de erro
-        const errorData = response.data; // Supondo que o servidor retorne a mensagem de erro no campo 'data'
+        const errorData = response.data;
         setMensagem(`Erro ao fazer login: ${errorData}`);
       }
     } catch (error) {
@@ -38,11 +44,11 @@ function CadastroForm() {
   return (
     <>
       <div className="container_pai">
-        <div class="container">
-          <div class="login-box">
+        <div className="container">
+          <div className="login-box">
             <h2>Login</h2>
             <form onSubmit={cadastrar}>
-              <div class="textbox">
+              <div className="textbox">
                 <input
                   type="text"
                   placeholder="Usuário"
@@ -51,7 +57,7 @@ function CadastroForm() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div class="textbox">
+              <div className="textbox">
                 <input
                   type="password"
                   placeholder="Senha"

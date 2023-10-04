@@ -1,19 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/imagens/logo.jpeg";
+import logo from "../../assets/imagens/logo.jpeg"
 
-function Navbar({ isLoggedIn, handleLogout }) {
+function Navbar() {
   return (
     <>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <Link to={"/"} class="navbar-item">
-            <img className="logo" src={logo} width="75" height="150" />
+      <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <Link to={"/"} className="navbar-item" >
+            <img 
+              className="logo"
+              src={logo}
+              width="75"
+              height="150"
+            />
           </Link>
 
           <a
             role="button"
-            class="navbar-burger"
+            className="navbar-burger"
             aria-label="menu"
             aria-expanded="false"
             data-target="navbarBasicExample"
@@ -24,54 +29,41 @@ function Navbar({ isLoggedIn, handleLogout }) {
           </a>
         </div>
 
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <Link to={"/"} class="navbar-item">
+        <div id="navbarBasicExample" className="navbar-menu">
+          <div className="navbar-start">
+            <Link to={"/"} className="navbar-item">
               Home
             </Link>
 
-            <Link to={"/contato"} class="navbar-item">
-              Sobre
+            <Link to={"/contato"} className="navbar-item">
+            Sobre
             </Link>
 
-            <Link to={"/contato"} class="navbar-item">
-              Contato
+            <Link to={"/contato"} className="navbar-item">
+            Contato
             </Link>
 
-            {/* <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">Mais</a>
+            {/* <div className="navbar-item has-dropdown is-hoverable">
+              <a className="navbar-link">Mais</a>
 
-              <div class="navbar-dropdown">
-                <Link to={"/contato"} class="navbar-item">
+              <div className="navbar-dropdown">
+                <Link to={"/contato"} className="navbar-item">
                   Contato
                 </Link>
-                <a class="navbar-item">Sobre</a>
+                <a className="navbar-item">Sobre</a>
               </div>
             </div> */}
           </div>
 
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                {isLoggedIn ? (
-                  <>
-                    <li>
-                      <Link to="/minha-conta">Minha Conta</Link>
-                    </li>
-                    <li>
-                      <button onClick={handleLogout}>Sair</button>
-                    </li>
-                  </>
-                ) : (
-                  <>
-                    <li>
-                      <Link to="/cadastro">Cadastrar</Link>
-                    </li>
-                    <li>
-                      <Link to="/login">Entrar</Link>
-                    </li>
-                  </>
-                )}
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <Link to={"/cadastro"} className="button is-info is-light">
+                  <strong>Cadastrar</strong>
+                </Link>
+                <Link to={"/login"} className="button is-light">
+                  Entrar
+                </Link>
               </div>
             </div>
           </div>

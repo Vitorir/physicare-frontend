@@ -23,10 +23,10 @@ function Home2() {
         </article>
       </main>
 
-      <div class="benefits-section" id="benefits">
+      <div className="benefits-section" id="benefits">
         <h2>Benefícios do Nosso App</h2>
-        <div class="benefits-list">
-          <div class="benefit">
+        <div className="benefits-list">
+          <div className="benefit">
             <img src={qualificados} alt="Benefício 1" />
             <h3>Encontre Profissionais Qualificados</h3>
             <p>
@@ -34,7 +34,7 @@ function Home2() {
               certificados, prontos para ajudar.
             </p>
           </div>
-          <div class="benefit">
+          <div className="benefit">
             <img src={objetivos} alt="Benefício 2" />
             <h3>Alcance Seus Objetivos de Fitness</h3>
             <p>
@@ -42,7 +42,7 @@ function Home2() {
               para atingir suas metas.
             </p>
           </div>
-          <div class="benefit">
+          <div className="benefit">
             <img src={flexibilidade} alt="Benefício 3" />
             <h3>Conveniência e Flexibilidade</h3>
             <p>
@@ -51,11 +51,11 @@ function Home2() {
             </p>
           </div>
         </div>
-        <div class="cta-buttons">
-          <a href="cadastro_profissionais.html" class="cta-button">
+        <div className="cta-buttons">
+          <a href="cadastro_profissionais.html" className="cta-button">
             Quero Ser um Profissional
           </a>
-          <a href="link_para_appstore" class="cta-button">
+          <a href="link_para_appstore" className="cta-button">
             Baixe Agora
           </a>
         </div>

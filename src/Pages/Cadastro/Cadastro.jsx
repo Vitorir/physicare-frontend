@@ -1,8 +1,10 @@
 import axios from "axios";
 import "./Cadastro.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Cadastro() {
+  const navigate = useNavigate()
   const [name, setname] = useState("");
   const [sobrename, setSobrename] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +15,7 @@ function Cadastro() {
 
   
 
-  // // preencher endereco automaticamente
+  // preencher endereco automaticamente
   // async function preencherCEP(evento) {
   //   evento.preventDefault();
 
@@ -64,7 +66,7 @@ function Cadastro() {
     });
   }, []);
 
-  // // validar CRM | CREF | CRN
+  // validar CRM | CREF | CRN
   async function buscarCRM() {
     const chave = 4835595981;
     const crm = 20344;
@@ -87,25 +89,19 @@ function Cadastro() {
       });
   }
 
-
-  
-
   // cadastrar no sessionstorage
   useEffect(() => {
-    // Define um objeto com os dados de usuário e password
     const userData = {
       name,
       email,
       password
     };
   
-    // Armazena os dados na sessionStorage como JSON
-    sessionStorage.setItem("userData", JSON.stringify(userData));
+    
   }, [name, email, password]);
 
   const handleCadastro = async () => {
     try {
-      // Simulando uma requisição POST para cadastrar o usuário
       const response = await axios.post("http://localhost:3000/public/register", {
         name,
         email,
@@ -113,7 +109,7 @@ function Cadastro() {
       });
 
       console.log("Cadastro bem-sucedido:", response.data);
-      // Você pode redirecionar o usuário para a página de login ou fazer outra ação aqui
+      navigate('/login')
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
     }
@@ -127,11 +123,11 @@ function Cadastro() {
           <h2>Cadastro do Profissional</h2>
           <form
             id="cadastroForm"
-            enctype="multipart/form-data"
+            encType="multipart/form-data"
             onSubmit={(e) => console.log(e.target.value)}
           >
             <div className="form-group">
-              <label for="name">name:</label>
+              <label htmlFor="name">Nome:</label>
               <input
                 type="text"
                 id="name"
@@ -142,7 +138,7 @@ function Cadastro() {
               />
             </div>
             <div className="form-group">
-              <label for="sobrename">Sobrename:</label>
+              <label htmlFor="sobrename">Sobrename:</label>
               <input
                 type="text"
                 id="sobrename"
@@ -153,7 +149,7 @@ function Cadastro() {
               />
             </div>
             <div className="form-group">
-              <label for="email">E-mail:</label>
+              <label htmlFor="email">E-mail:</label>
               <input
                 type="email"
                 id="email"
@@ -164,7 +160,7 @@ function Cadastro() {
               />
             </div>
             <div className="form-group">
-              <label for="password">password:</label>
+              <label htmlFor="password">Senha:</label>
               <input
                 type="password"
                 id="password"
@@ -179,19 +175,19 @@ function Cadastro() {
                 <button className="accordion-button">Informações Adicionais</button>
                 <div className="accordion-content">
                   <div className="form-group">
-                    <label for="cidade">Cidade:</label>
+                    <label htmlFor="cidade">Cidade:</label>
                     <input type="text" id="cidade" name="cidade" />
                   </div>
                   <div className="form-group">
-                    <label for="estado">Estado:</label>
+                    <label htmlFor="estado">Estado:</label>
                     <input type="text" id="estado" name="estado" />
                   </div>
                   <div className="form-group">
-                    <label for="pais">País:</label>
+                    <label htmlFor="pais">País:</label>
                     <input type="text" id="pais" name="pais" />
                   </div>
                   <div className="form-group">
-                    <label for="sexo">Sexo:</label>
+                    <label htmlFor="sexo">Sexo:</label>
                     <select id="sexo" name="sexo">
                       <option value="masculino">Masculino</option>
                       <option value="feminino">Feminino</option>
@@ -199,7 +195,7 @@ function Cadastro() {
                     </select>
                   </div>
                   <div className="form-group">
-                    <label for="cep">CEP:</label>
+                    <label htmlFor="cep">CEP:</label>
                     <input
                       type="text"
                       id="cep"
@@ -208,7 +204,7 @@ function Cadastro() {
                     />
                   </div>
                   <div className="form-group">
-                    <label for="tempoProfissao">
+                    <label htmlFor="tempoProfissao">
                       Tempo de Profissão (anos):
                     </label>
                     <input
@@ -218,15 +214,15 @@ function Cadastro() {
                     />
                   </div>
                   <div className="form-group">
-                    <label for="idade">Idade:</label>
+                    <label htmlFor="idade">Idade:</label>
                     <input type="number" id="idade" name="idade" />
                   </div>
                   <div className="form-group">
-                    <label for="telefone">Telefone:</label>
+                    <label htmlFor="telefone">Telefone:</label>
                     <input type="tel" id="telefone" name="telefone" />
                   </div>
                   <div className="form-group">
-                    <label for="documento">Documentos (RG, Diploma):</label>
+                    <label htmlFor="documento">Documentos (RG, Diploma):</label>
                     <input
                       type="file"
                       id="documento"
