@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./CadastroForm.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import logo from "../../assets/imagens/logo-no-background.svg";
 
 function CadastroForm() {
   const navigate = useNavigate();
@@ -19,13 +20,15 @@ function CadastroForm() {
 
       if (response.status === 200) {
         setMensagem("Login bem-sucedido!");
-        
-        sessionStorage.setItem("accessToken", JSON.stringify(response.data.accessToken))
+
+        sessionStorage.setItem(
+          "accessToken",
+          JSON.stringify(response.data.accessToken)
+        );
 
         setTimeout(() => {
-          navigate('/dashboard')
-        }, [2000])
-        
+          navigate("/dashboard");
+        }, [2000]);
       } else {
         const errorData = response.data;
         setMensagem(`Erro ao fazer login: ${errorData}`);
@@ -45,8 +48,9 @@ function CadastroForm() {
     <>
       <div className="container_pai">
         <div className="container">
+          <img className="logo" src={logo} height={"150px"} width={"200px"} />
           <div className="login-box">
-            <h2>Login</h2>
+            {/* <h2>Login</h2> */}
             <form onSubmit={cadastrar}>
               <div className="textbox">
                 <input
@@ -66,7 +70,7 @@ function CadastroForm() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button type="button" onClick={handleLogin}>
+              <button className="btn" type="button" onClick={handleLogin}>
                 Entrar
               </button>
               {mensagem && <p>{mensagem}</p>}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/imagens/logo.jpeg"
+import logo from "../../assets/imagens/logo-no-background.svg"
 
 function Navbar() {
   return (
@@ -11,8 +11,8 @@ function Navbar() {
             <img 
               className="logo"
               src={logo}
-              width="75"
-              height="150"
+              width="150"
+              height="250"
             />
           </Link>
 

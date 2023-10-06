@@ -14,8 +14,12 @@ body {
 }
 
 .container {
-    width: 100px;
-    max-width: 50% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    width: 50px;
+    max-width: 450px !important;
     margin: auto;
     background: #fff;
     /* Branco */
@@ -35,12 +39,18 @@ h2 {
     /* Azul esverdeado */
 }
 
+.logo {
+    margin: 28px !important; 
+}
+
+
+
 .textbox {
     margin-bottom: 20px;
 }
 
 .textbox input {
-    width: 50%;
+    width: 100%;
     padding: 10px;
     background: #f0f8ff;
     /* Azul esverdeado claro */
@@ -54,7 +64,7 @@ h2 {
     width: 50%;
     padding: 10px;
     border: none;
-    background: #1e90ff;
+    background: #19cbf3;
     /* Azul esverdeado */
     color: #fff;
     cursor: pointer;
@@ -63,6 +73,7 @@ h2 {
 }
 
 .btn:hover {
-    background: #005b9f;
+    background: #fff;
+    color: #19cbf3;
     /* Azul mais escuro ao passar o mouse */
 }

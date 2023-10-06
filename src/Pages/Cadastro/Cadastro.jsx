@@ -2,6 +2,7 @@ import axios from "axios";
 import "./Cadastro.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/imagens/logo-no-background.svg";
 
 function Cadastro() {
   const navigate = useNavigate()
@@ -120,16 +121,17 @@ function Cadastro() {
     <>
       <div className="container_pai">
         <div className="container">
-          <h2>Cadastro do Profissional</h2>
+        <img className="logo" src={logo} height={"150px"} width={"200px"} />
+          {/* <h2>Cadastro do Profissional</h2> */}
           <form
             id="cadastroForm"
             encType="multipart/form-data"
             onSubmit={(e) => console.log(e.target.value)}
           >
             <div className="form-group">
-              <label htmlFor="name">Nome:</label>
               <input
                 type="text"
+                placeholder="Nome"
                 id="name"
                 name="name"
                 value={name}
@@ -138,9 +140,9 @@ function Cadastro() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="sobrename">Sobrename:</label>
               <input
                 type="text"
+                placeholder="Sobrenome"
                 id="sobrename"
                 name="sobrename"
                 value={sobrename}
@@ -149,9 +151,9 @@ function Cadastro() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">E-mail:</label>
               <input
                 type="email"
+                placeholder="Email"
                 id="email"
                 name="email"
                 value={email}
@@ -160,9 +162,9 @@ function Cadastro() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Senha:</label>
               <input
                 type="password"
+                placeholder="Senha"
                 id="password"
                 name="password"
                 value={password}
@@ -234,7 +236,7 @@ function Cadastro() {
                 </div>
               </div>
             </div>
-            <button type="submit" onClick={handleCadastro}>
+            <button className="btn" type="submit" onClick={handleCadastro}>
               Cadastrar
             </button>
           </form>
