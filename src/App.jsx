@@ -6,6 +6,7 @@ import Page404 from "./Pages/Page404/Page404";
 import Home2 from "./Pages/Home/Home2";
 import Footer from "./Components/Footer/Footer";
 import Dashboard from "./Pages/Dashboard/Dashboard";
+import Sobre from "./Pages/Sobre/Sobre";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
+          <Route path="/sobre" element={<Sobre/>}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
         <Footer />

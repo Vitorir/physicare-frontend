@@ -1,0 +1,44 @@
+.sobre {
+    padding: 40px;
+    margin: 20px;
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    color: #333;
+    text-align: center;
+    transition: transform 0.3s;
+  }
+  
+  .sobre:hover {
+    transform: scale(1.05);
+  }
+  
+  .sobre h1 {
+    font-size: 2.5rem;
+    color: #007BFF; /* Azul */
+    margin-bottom: 20px;
+  }
+  
+  .sobre p {
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  /* Adicione um ícone animado */
+  .sobre i {
+    font-size: 2rem;
+    color: #007BFF; /* Azul */
+    display: inline-block;
+    margin-top: 20px;
+    transform-origin: center;
+    animation: bounce 1s infinite alternate;
+  }
+  
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10px);
+    }
+  }
