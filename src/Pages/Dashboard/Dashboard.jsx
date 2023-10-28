@@ -1,11 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../../Components/Sidebar/Sidebar";
+import SidebarBulma from "../../Components/Sidebar/SidebarBulma";
 
 function Dashboard() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate()
-
-    const appointments = [
+  const appointments = [
     {
       id: 1,
       title: "Reunião de equipe",
@@ -27,51 +28,11 @@ function Dashboard() {
   ];
 
   function voltar() {
-    navigate(-1)
+    navigate(-1);
   }
-
 
   return (
     <div className="columns">
-      <div className="column is-one-quarter">
-        <aside className="menu">
-          <p className="menu-label">Menu</p>
-          <ul className="menu-list">
-            <li>
-              <a className="is-active" href="#">
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <a href="#">Clientes</a>
-            </li>
-            <li>
-              <a href="#">Pedidos</a>
-            </li>
-            <li>
-              <a href="#">Produtos</a>
-            </li>
-            <li>
-              <a href="#">Relatórios</a>
-            </li>
-          </ul>
-          <p className="menu-label">Configurações</p>
-          <ul className="menu-list">
-            <li>
-              <a href="#">Perfil</a>
-            </li>
-            <li>
-              <a href="#">Segurança</a>
-            </li>
-            <li>
-              <a href="#">Notificações</a>
-            </li>
-          </ul>
-        </aside>
-      </div>
-
-      
-      
       <div className="column">
         <section className="section">
           {/* Cabeçalho */}
@@ -83,7 +44,9 @@ function Dashboard() {
             </div>
             <div className="level-right">
               <div className="level-item">
-                <button className="button is-info" onClick={voltar}>Sair</button>
+                <button className="button is-info" onClick={voltar}>
+                  Sair
+                </button>
               </div>
             </div>
           </div>
@@ -113,7 +76,6 @@ function Dashboard() {
           </div>
         </section>
       </div>
-
     </div>
   );
 }

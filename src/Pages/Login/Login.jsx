@@ -1,10 +1,10 @@
 import React from 'react'
-import CadastroForm from '../../Components/Form/CadastroForm'
+import LoginForm from '../../Components/Form/LoginForm'
 
-function Login() {
+function Login({handleLogin}) {
   return (
     <>
-    <CadastroForm/>
+    <LoginForm handleLogin={handleLogin}/>
     </>
   )
 }

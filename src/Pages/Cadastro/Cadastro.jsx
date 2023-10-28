@@ -5,16 +5,16 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/imagens/logo-no-background.svg";
 
 function Cadastro() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [name, setname] = useState("");
   const [sobrename, setSobrename] = useState("");
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
+  const [cref, setCref] = useState("");
+  const [isCrefValid, setIsCrefValid] = useState(false)
   // const [cidade, setCidade] = useState("");
-  // const [estado, setEstado] = useState("");
+  const [estado, setEstado] = useState("");
   // const [cep, setCep] = useState("");
-
-  
 
   // preencher endereco automaticamente
   // async function preencherCEP(evento) {
@@ -61,67 +61,81 @@ function Cadastro() {
       // incluindo os documentos que foram selecionados.
 
       // Exemplo de exibição dos dados no console:
-      formData.forEach(function (value, key) {
-        console.log(key + ": " + value);
-      });
+      // formData.forEach(function (value, key) {
+      //   console.log(key + ": " + value);
+      // });
     });
   }, []);
 
   // validar CRM | CREF | CRN
   async function buscarCRM() {
     const chave = 4835595981;
-    const crm = 20344;
-    const url = `https://www.consultacrm.com.br/api/index.php?tipo=TIPO&q=${crm}&chave=${chave}&destino=xml`;
+    // const crm = 20344;
+    const url2 = `https://www.consultacrm.com.br/api/index.php?tipo=crm&uf=MG&q=20344&chave=4835595981&destino=json`;
+    const url = `https://www.consultacrm.com.br/api/index.php?tipo=crm&uf${estado}=&q=${cref}&chave=${chave}&destino=json`;
 
-    fetch(url)
-      .then((response) => {
-        if (response.status === 200) {
-          return response.text();
-        } else {
-          console.error(`Erro ${response.status}: ${response.statusText}`);
-          return Promise.reject("Erro na requisição");
-        }
-      })
-      .then((data) => {
+    try {
+      const response = await fetch(url);
+      if (response.status === 200) {
+        const data = await response.json();
         console.log(data);
-      })
-      .catch((error) => {
-        console.error("Erro ao fazer a requisição:", error);
-      });
+        if (data.status === "true") {
+          console.log("URL:", data.url);
+          console.log("Total:", data.total);
+
+          if (data.total > 0) {
+            console.log("Parabéns! O CREF é válido!");
+            setIsCrefValid(true)
+          }
+          
+        } else {
+          console.error(
+            "A resposta retornou falso. Mensagem de erro:",
+            data.mensagem
+          );
+        }
+      } else {
+        console.error(`Erro ${response.status}: ${response.statusText}`);
+      }
+    } catch (error) {
+      console.error("Erro ao fazer a requisição:", error);
+    }
   }
 
   // cadastrar no sessionstorage
-  useEffect(() => {
-    const userData = {
-      name,
-      email,
-      password
-    };
-  
-    
-  }, [name, email, password]);
+  // useEffect(() => {
+  //   const userData = {
+  //     name,
+  //     email,
+  //     password,
+  //   };
+  // }, [name, email, password]);
 
-  const handleCadastro = async () => {
+  const handleCadastro = async (event) => {
+    event.preventDefault()
+    
     try {
-      const response = await axios.post("http://localhost:3000/public/register", {
-        name,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://localhost:3000/public/register",
+        {
+          name,
+          email,
+          password,
+        }
+      );
 
       console.log("Cadastro bem-sucedido:", response.data);
-      navigate('/login')
+      navigate("/login");
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
     }
   };
-  
 
   return (
     <>
       <div className="container_pai">
         <div className="container">
-        <img className="logo" src={logo} height={"150px"} width={"200px"} />
+          <img className="logo" src={logo} height={"150px"} width={"200px"} />
           {/* <h2>Cadastro do Profissional</h2> */}
           <form
             id="cadastroForm"
@@ -174,7 +188,9 @@ function Cadastro() {
             </div>
             <div className="accordion">
               <div className="accordion-item">
-                <button className="accordion-button">Informações Adicionais</button>
+                <button className="accordion-button">
+                  Informações Adicionais
+                </button>
                 <div className="accordion-content">
                   <div className="form-group">
                     <label htmlFor="cidade">Cidade:</label>
@@ -182,8 +198,8 @@ function Cadastro() {
                   </div>
                   <div className="form-group">
                     <label htmlFor="estado">Estado:</label>
-                    <input type="text" id="estado" name="estado" />
-                  </div>
+                    <input type="text" id="estado" name="estado" onChange={(e) => setEstado(e.target.value)} />
+                  </div>  
                   <div className="form-group">
                     <label htmlFor="pais">País:</label>
                     <input type="text" id="pais" name="pais" />
@@ -223,6 +239,7 @@ function Cadastro() {
                     <label htmlFor="telefone">Telefone:</label>
                     <input type="tel" id="telefone" name="telefone" />
                   </div>
+
                   <div className="form-group">
                     <label htmlFor="documento">Documentos (RG, Diploma):</label>
                     <input
@@ -233,6 +250,19 @@ function Cadastro() {
                       multiple
                     />
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="cref">CREF:</label>
+                    <input
+                      type="number"
+                      id="cref"
+                      name="cref"
+                      onChange={(e) => setCref(e.target.value)}
+                    />
+                  </div>
+                  <button className="btn" type="submit" onClick={buscarCRM}>
+                    Buscar CREF
+                  </button>
+                  <p>{isCrefValid && "O CREF é válido!"}</p>
                 </div>
               </div>
             </div>
