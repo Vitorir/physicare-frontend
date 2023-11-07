@@ -39,7 +39,7 @@ function Dashboard() {
           <div className="level">
             <div className="level-left">
               <div className="level-item">
-                <p className="title is-4">Bem-vindo</p>
+                <p className="title is-4">FOTO</p>
               </div>
             </div>
             <div className="level-right">

@@ -156,3 +156,10 @@ button:hover {
 body:hover {
     background-color: #66b3cc;
 }
+
+
+/* checkbox */
+.checkbox {
+    margin: 10px;
+    font-weight: 300;
+}

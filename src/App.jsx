@@ -7,20 +7,45 @@ import Home2 from "./Pages/Home/Home2";
 import Footer from "./Components/Footer/Footer";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Sobre from "./Pages/Sobre/Sobre";
+import Ficha from "./Pages/Ficha/Ficha";
+import Chat from "./Pages/Chat/Chat";
+import SidebarBulma from "./Components/Sidebar/SidebarBulma";
+import { useState } from "react";
+
+// Importacoes do Firebase
+import { app, database } from './config/firebase'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+
 
 function App() {
 
-  
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        <Navbar/>
         <Routes>
           <Route path="/" element={<Home2 />}></Route>
           <Route path="/cadastro" element={<Cadastro />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
-          <Route path="/sobre" element={<Sobre/>}></Route>
+          <Route path="/sobre" element={<Sobre />}></Route>
+          <Route
+              path="/dashboard/*"
+              element={
+                <div className="columns">
+                  <div className="column is-one-fifth">
+                    {/* <SidebarBulma /> */}
+                  </div>
+                  <div className="column">
+                    <Routes>
+                      <Route path="/" element={<Dashboard />} />
+                      <Route path="/ficha" element={<Ficha />} />
+                      <Route path="/chat" element={<Chat />} />
+                    </Routes>
+                  </div>
+                </div>
+              }
+            />
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
         <Footer />

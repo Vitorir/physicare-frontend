@@ -1,10 +1,10 @@
 import React from 'react'
 import LoginForm from '../../Components/Form/LoginForm'
 
-function Login({handleLogin}) {
+function Login() {
   return (
     <>
-    <LoginForm handleLogin={handleLogin}/>
+    <LoginForm/>
     </>
   )
 }

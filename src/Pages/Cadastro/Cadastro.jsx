@@ -4,17 +4,81 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/imagens/logo-no-background.svg";
 
+
+// Importacoes do Firebase
+import { app, database } from '../../config/firebase'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+
 function Cadastro() {
   const navigate = useNavigate();
-  const [name, setname] = useState("");
-  const [sobrename, setSobrename] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setpassword] = useState("");
   const [cref, setCref] = useState("");
-  const [isCrefValid, setIsCrefValid] = useState(false)
-  // const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
-  // const [cep, setCep] = useState("");
+  const [isCrefValid, setIsCrefValid] = useState(false);
+
+  // Lógica do Firebase
+  let auth = getAuth();
+  const collectionRef = collection(database, "users");
+  const collectionRef2 = collection(database, "users-publicos");
+
+  const [data, setData] = useState({
+    name: '',
+    email: "",
+    password: "",
+    profissional: false
+  });
+
+  function handleInput(event) {
+    let newInput;
+    if (event.target.name == 'profissional') {
+      newInput = { [event.target.name]: event.target.checked }
+    } else {
+      newInput = { [event.target.name]: event.target.value }
+    }
+    
+    setData({ ...data, ...newInput });
+  }
+  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // adicionar dados
+    addDoc(collectionRef, {
+      nome: data.name,
+      email: data.email,
+      senha: data.password,
+      profissional: data.profissional      
+    })
+      .then(() => {
+        alert("Dados adicionados!");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+      addDoc(collectionRef2, {
+        nome: data.name,
+        email: data.email,
+        profissional: data.profissional      
+      })
+        .then(() => {
+          alert("Dados públicos adicionados!");
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+
+    // criar usuario
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then((response) => {
+        console.log(response.user);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+      console.log(data);
+  };
 
   // preencher endereco automaticamente
   // async function preencherCEP(evento) {
@@ -41,31 +105,31 @@ function Cadastro() {
   //   preencherCEP();
   // }, []);
 
-  useEffect(() => {
-    const form = document.getElementById("cadastroForm");
-    const accordionButton = document.querySelector(".accordion-button");
-    const accordionContent = document.querySelector(".accordion-content");
+  // useEffect(() => {
+  //   const form = document.getElementById("cadastroForm");
+  //   const accordionButton = document.querySelector(".accordion-button");
+  //   const accordionContent = document.querySelector(".accordion-content");
 
-    accordionButton.addEventListener("click", function () {
-      if (accordionContent.style.display === "none") {
-        accordionContent.style.display = "block";
-      } else {
-        accordionContent.style.display = "none";
-      }
-    });
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
-      const formData = new FormData(form);
+  //   accordionButton.addEventListener("click", function () {
+  //     if (accordionContent.style.display === "none") {
+  //       accordionContent.style.display = "block";
+  //     } else {
+  //       accordionContent.style.display = "none";
+  //     }
+  //   });
+  //   form.addEventListener("submit", function (event) {
+  //     event.preventDefault();
+  //     const formData = new FormData(form);
 
-      // Aqui você pode usar a variável "formData" para enviar os dados para o servidor,
-      // incluindo os documentos que foram selecionados.
+  //     // Aqui você pode usar a variável "formData" para enviar os dados para o servidor,
+  //     // incluindo os documentos que foram selecionados.
 
-      // Exemplo de exibição dos dados no console:
-      // formData.forEach(function (value, key) {
-      //   console.log(key + ": " + value);
-      // });
-    });
-  }, []);
+  //     // Exemplo de exibição dos dados no console:
+  //     // formData.forEach(function (value, key) {
+  //     //   console.log(key + ": " + value);
+  //     // });
+  //   });
+  // }, []);
 
   // validar CRM | CREF | CRN
   async function buscarCRM() {
@@ -85,9 +149,8 @@ function Cadastro() {
 
           if (data.total > 0) {
             console.log("Parabéns! O CREF é válido!");
-            setIsCrefValid(true)
+            setIsCrefValid(true);
           }
-          
         } else {
           console.error(
             "A resposta retornou falso. Mensagem de erro:",
@@ -111,25 +174,25 @@ function Cadastro() {
   //   };
   // }, [name, email, password]);
 
-  const handleCadastro = async (event) => {
-    event.preventDefault()
-    
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/public/register",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+  // const handleCadastro = async (event) => {
+  //   event.preventDefault();
 
-      console.log("Cadastro bem-sucedido:", response.data);
-      navigate("/login");
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-    }
-  };
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:3000/public/register",
+  //       {
+  //         name,
+  //         email,
+  //         password,
+  //       }
+  //     );
+
+  //     console.log("Cadastro bem-sucedido:", response.data);
+  //     navigate("/login");
+  //   } catch (error) {
+  //     console.error("Erro ao cadastrar:", error);
+  //   }
+  // };
 
   return (
     <>
@@ -148,30 +211,20 @@ function Cadastro() {
                 placeholder="Nome"
                 id="name"
                 name="name"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
+                // value={name}
+                onChange={(e) => handleInput(e)}
                 required
               />
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                placeholder="Sobrenome"
-                id="sobrename"
-                name="sobrename"
-                value={sobrename}
-                onChange={(e) => setSobrename(e.target.value)}
-                required
-              />
-            </div>
+            <div className="form-group"></div>
             <div className="form-group">
               <input
                 type="email"
                 placeholder="Email"
                 id="email"
                 name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                // value={email}
+                onChange={(e) => handleInput(e)}
                 required
               />
             </div>
@@ -181,12 +234,21 @@ function Cadastro() {
                 placeholder="Senha"
                 id="password"
                 name="password"
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
+                // value={password}
+                onChange={(e) => handleInput(e)}
                 required
               />
+              <label className="checkbox">
+                <input 
+                type="checkbox"
+                onChange={(e) => handleInput(e)}
+                name="profissional"
+                />
+                Profissional
+              </label>
             </div>
-            <div className="accordion">
+
+            {/* <div className="accordion">
               <div className="accordion-item">
                 <button className="accordion-button">
                   Informações Adicionais
@@ -198,8 +260,13 @@ function Cadastro() {
                   </div>
                   <div className="form-group">
                     <label htmlFor="estado">Estado:</label>
-                    <input type="text" id="estado" name="estado" onChange={(e) => setEstado(e.target.value)} />
-                  </div>  
+                    <input
+                      type="text"
+                      id="estado"
+                      name="estado"
+                      onChange={(e) => setEstado(e.target.value)}
+                    />
+                  </div>
                   <div className="form-group">
                     <label htmlFor="pais">País:</label>
                     <input type="text" id="pais" name="pais" />
@@ -265,8 +332,9 @@ function Cadastro() {
                   <p>{isCrefValid && "O CREF é válido!"}</p>
                 </div>
               </div>
-            </div>
-            <button className="btn" type="submit" onClick={handleCadastro}>
+            </div> */}
+
+            <button className="btn" type="submit" onClick={handleSubmit}>
               Cadastrar
             </button>
           </form>
