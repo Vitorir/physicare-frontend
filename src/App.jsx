@@ -16,6 +16,7 @@ import { useState } from "react";
 import { app, database } from './config/firebase'
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
+import { Auth } from "./Pages/Auth/Auth";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/" element={<Home2 />}></Route>
           <Route path="/cadastro" element={<Cadastro />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/auth" element={<Auth />}></Route>
           <Route path="/sobre" element={<Sobre />}></Route>
           <Route
               path="/dashboard/*"
@@ -35,7 +37,7 @@ function App() {
                 <div className="columns">
                   <div className="column is-one-fifth">
                     {/* <SidebarBulma /> */}
-                  </div>
+                  </div>  
                   <div className="column">
                     <Routes>
                       <Route path="/" element={<Dashboard />} />

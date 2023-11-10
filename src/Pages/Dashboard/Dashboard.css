@@ -1,0 +1,54 @@
+.dashboard-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-section-content {
+    display: flex;
+    align-items: center;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile-info {
+    margin-left: 20px;
+}
+
+.clients-table {
+    width: 100%;
+}
+
+.action-button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.primary-button {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+.info-button {
+    background-color: #2196f3;
+    color: #fff;
+}
+
+.success-button {
+    background-color: #ff9800;
+    color: #fff;
+}

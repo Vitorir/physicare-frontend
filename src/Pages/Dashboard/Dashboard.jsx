@@ -1,83 +1,80 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import Sidebar from "../../Components/Sidebar/Sidebar";
-import SidebarBulma from "../../Components/Sidebar/SidebarBulma";
+import "./Dashboard.css"; // Importe o arquivo de estilo CSS
 
-function Dashboard() {
-  const navigate = useNavigate();
+import profileImage from "./profileimage.png";
 
-  const appointments = [
-    {
-      id: 1,
-      title: "Reunião de equipe",
-      date: "2023-09-15",
-      time: "09:00 AM",
-    },
-    {
-      id: 2,
-      title: "Consulta médica",
-      date: "2023-09-16",
-      time: "02:30 PM",
-    },
-    {
-      id: 3,
-      title: "Apresentação de projeto",
-      date: "2023-09-17",
-      time: "10:00 AM",
-    },
-  ];
-
-  function voltar() {
-    navigate(-1);
-  }
-
+const Dashboard = () => {
   return (
-    <div className="columns">
-      <div className="column">
-        <section className="section">
-          {/* Cabeçalho */}
-          <div className="level">
-            <div className="level-left">
-              <div className="level-item">
-                <p className="title is-4">FOTO</p>
-              </div>
+    <div className="dashboard-container">
+      <div className="section-container">
+        <section className="profile-section">
+          <div className="profile-section-content">
+            <div className="profile-image-container">
+              <img
+                src={profileImage}
+                alt="profile"
+                className="profile-image"
+              />
             </div>
-            <div className="level-right">
-              <div className="level-item">
-                <button className="button is-info" onClick={voltar}>
-                  Sair
-                </button>
-              </div>
+            <div className="profile-info">
+              <h1 className="profile-name">Nome do Profissional</h1>
+              <p>Profissão: Desenvolvedor Web</p>
+              <p>Localização: Cidade, País</p>
+              <p>Email: exemplo@dominio.com</p>
+              <p>CREF: 20344</p>
             </div>
           </div>
+        </section>
+      </div>
 
-          <div className="box">
-            <h2 className="title is-5">Agendamentos</h2>
-            <ul>
-              {appointments.map((appointment) => (
-                <li key={appointment.id}>
-                  <strong>{appointment.title}</strong>
-                  <br />
-                  Data: {appointment.date}
-                  <br />
-                  Hora: {appointment.time}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="box">
-            <h2 className="title is-5">Atividades Recentes</h2>
-            <ul>
-              <li>Atividade 1</li>
-              <li>Atividade 2</li>
-              <li>Atividade 3</li>
-            </ul>
-          </div>
+      <div className="section-container">
+        <section className="clients-section">
+          <table className="clients-table">
+            <thead>
+              <tr>
+                <th>Nome do Cliente</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Fulano de tal</td>
+                <td>88 987456123</td>
+                <td>fulanodetal@gmail.com</td>
+                <td>
+                  <button className="action-button primary-button">Solicitação</button>
+                  <button className="action-button info-button">Chat</button>
+                  <button className="action-button success-button">Enviar Ficha</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Beltrano da Silva</td>
+                <td>85 987123456</td>
+                <td>beltranodasilva@gmail.com</td>
+                <td>
+                  <button className="action-button primary-button">Solicitação</button>
+                  <button className="action-button info-button">Chat</button>
+                  <button className="action-button success-button">Enviar Ficha</button>
+                </td>
+              </tr>
+              <tr>
+                <td>São José das Quantas</td>
+                <td>85 987789456</td>
+                <td>saojosedasquantas@gmail.com</td>
+                <td>
+                  <button className="action-button primary-button">Solicitação</button>
+                  <button className="action-button info-button">Chat</button>
+                  <button className="action-button success-button">Enviar Ficha</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </section>
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

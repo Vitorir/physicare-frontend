@@ -78,6 +78,8 @@ function Cadastro() {
       });
 
       console.log(data);
+
+      navigate('/auth')
   };
 
   // preencher endereco automaticamente
